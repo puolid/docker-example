@@ -1,4 +1,4 @@
-# myproject
+# Docker example project
 
 This project contains simple (and currently not so good) url shortener. 
 
@@ -34,3 +34,11 @@ Command above creates volume for database which is saved to local computer.
 
 ### Docker-compose
 
+First build myproject-app image with following command:
+``` bash
+docker build -t myproject-app .
+```
+
+``` bash
+docker-compose up
+```
