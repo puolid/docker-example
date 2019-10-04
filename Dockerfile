@@ -11,7 +11,7 @@ nano
 WORKDIR /var/www/html
 
 # Copy local app files to container 
-COPY . /var/www/html/
+COPY ./src /var/www/html/
 
 # Expose prot 80
 EXPOSE 80
