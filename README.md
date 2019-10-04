@@ -66,11 +66,12 @@ To get inside docker container type following command:
 $ docker exec -it myproject-db bash
 ```
 
-Now you should be inside of our container so lets continue
-
+Next run MySQL cli with command:
 ``` bash
 mysql -u admin -p
 ```
+
+> When we started our container we set username to "admin" and password to "passwd"
 
 Create database for our application:
 ```SQL
@@ -83,7 +84,7 @@ CREATE TABLE IF NOT EXISTS test (
 );
 ```
 
-That's it now you can try to use our application on our web browser: [127.0.0.1](127.0.0.1)
+That's it. Now you should be able to use application on your web browser: [127.0.0.1](http://127.0.0.1)
 
 
 ### Docker-compose
