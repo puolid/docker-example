@@ -1,0 +1,40 @@
+version: '3'
+
+networks:
+  mynetwork:
+
+services:
+  apache2:
+    image: myproject-app
+    container_name: myproject-app
+    environment:
+      - MYSQL_USER=admin
+      - MYSQL_DATABASE=test
+      - MYSQL_PASSWORD=passwd
+      - MYSQL_HOST=myproject-db
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:5.7.22
+    container_name: myproject-db
+    restart: always
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: passwd
+      MYSQL_ROOT_PASSWORD: passwd
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - .data:/var/lib/mysql
+    networks:
+      - mynetwork
