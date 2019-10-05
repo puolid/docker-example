@@ -15,14 +15,16 @@ $ git clone https://github.com/puolid/docker-example.git
 
 ## Usage & config
 
-To run this project you can use [docker](https://docs.docker.com/engine/docker-overview/) or [docker-compose](https://docs.docker.com/compose/). This project uses default http&mysql server ports (80 and 3306) so if tehm already in use, remember to change them.
+To run this project you can use [docker](https://docs.docker.com/engine/docker-overview/) or [docker-compose](https://docs.docker.com/compose/). This project uses default http&mysql server ports (80 and 3306) so if them already in use, remember to change them.
 
 
 ### Docker
 
+To get our containers running I recommend to look first our [Dockerfile](https://github.com/puolid/docker-example/blob/master/Dockerfile). After that follow this instruction
+
 #### Docker network
 
-Create new [docker network](https://docs.docker.com/network/) so our application server can connect to MySQL server.
+Create new [docker network](https://docs.docker.com/network/) so our application server can find/connect to MySQL server. Containers in same network can call each other by container name.
 
 To create new network type following command:
 ``` bash
@@ -84,11 +86,22 @@ CREATE TABLE IF NOT EXISTS test (
 );
 ```
 
-That's it. Now you should be able to use application on your web browser: [127.0.0.1](http://127.0.0.1)
+---
 
+That's it. Now you should be able to use our application on your web browser: [127.0.0.1](http://127.0.0.1).
+
+To stop containers type following command 
+``` bash 
+$ docker stop myproject-app
+$ docker stop myproject-db
+```
+You can also stop container by id which you can see with: "docker ps" -command.
+
+---
 
 ### Docker-compose
 
+Running containers with docker compose is pretty straight forward. To understand the [logic behind docker-compose.yml file](https://docs.docker.com/compose/compose-file/) which is used to run our containers I recommend to get containers running without compose first if you havent already done it.
 
 #### Docker-compose
 
@@ -105,32 +118,38 @@ Docker-compose automatically builds, (re)creates, starts, and attaches to contai
 $ docker-compose up
 ```
 
+That's it. Now you should be able to use our application on your web browser: [127.0.0.1](http://127.0.0.1)
+
+To stop use: "docker-compose stop" -command or use to stop and remove container, networks, volumes and images created by up type: "docker-compose down" -command.
+
+---
+
 ## List of some useful docker commands
 
-### Docker
-| Command| Meaning                                               |
-|--------|-------------------------------------------------------|
-| build  | Build an image from a Dockerfile                      |
-| run    | Run a command in a new container                      |
-| exec   | Run a command in a running container                  |
-| ps     | List containers                                       |
-| stop   | Stop one or more running containers                   |
-| rm     | Remove one or more containers                         |
-
-
-### Docker build
+### Docker [Command]
 | Command | Meaning                                                 |
-|---------|---------------------------------------------------------|
+|---------|:--------------------------------------------------------|
+| build   | Build an image from a Dockerfile                        |
+| run     | Run a command in a new container                        |
+| exec    | Run a command in a running container                    |
+| ps      | List containers                                         |
+| stop    | Stop one or more running containers                     |
+| rm      | Remove one or more containers                           |
+
+
+### Docker build [Options]
+| Option  | Meaning                                                 |
+|---------|:--------------------------------------------------------|
 | -t      | Name and optionally a tag in the ‘name:tag’ format      |
 | -rm     | Remove intermediate containers after a successful build |
 
-### Docker run
-| Command| Meaning                                               |
-|--------|-------------------------------------------------------|
-| --rm   | Automatically remove the container when it exits      |
-| --name | Assign a name to the container                        |
-| --net  | Connect a container to a network                      |
-| -p     | Publish a container’s port(s) to the host             |
-| -e     | Set environment variables                             |
-| -d     | Run container in background and print container ID    |
-| -v     | Bind mount a volume                                   |
+### Docker run [Options]
+| Option | Meaning                                                  |
+|--------|:---------------------------------------------------------|
+| --rm   | Automatically remove the container when it exits         |
+| --name | Assign a name to the container                           |
+| --net  | Connect a container to a network                         |
+| -p     | Publish a container’s port(s) to the host                |
+| -e     | Set environment variables                                |
+| -d     | Run container in background and print container ID       |
+| -v     | Bind mount a volume                                      |
