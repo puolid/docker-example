@@ -1,4 +1,4 @@
-# We start to build our image from php-apache image.
+# We start to build our image from the php-apache image.
 # https://hub.docker.com/_/php
 
 FROM php:7.2-apache
@@ -12,10 +12,10 @@ RUN apt-get update && apt-get install -y \
 curl \
 nano
 
-# Install php pdo package so our app can create a pdo connetion to our database
+# Install PHP PDO package so our app can create a PDO connection to our database
 RUN docker-php-ext-install pdo_mysql
 
-# Set current working directory to apache default public html directory.
+# Set the current working directory to apache default public HTML directory.
 WORKDIR /var/www/html
 
 # Copy local app files to container 
