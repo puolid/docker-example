@@ -54,14 +54,14 @@ $ docker run --rm --name myproject-app --net my-network -p 80:80 -d -e MYSQL_HOS
 
 For our MySQL container, we are using official [MySQL 5.7 image from docker hub](https://hub.docker.com/_/mysql). We are not using our own dockerfile to create image because in this example we don't need to install anything else on it. 
 
-So you might be thinking now what happens to our database after we stop our container. With command [-v we are creating volume](https://docs.docker.com/storage/volumes/) which stores our database to our local system. You can find this volume in that directory where you are at the moment when running command  below or change path whatever you wish to save that database replacing [$(pwd)](https://en.wikipedia.org/wiki/Pwd) which is variable set to the present working directory.
+So you might be thinking now what happens to our database after we stop our container. With command [-v we are creating volume](https://docs.docker.com/storage/volumes/) which stores our database to our local system. You can find this volume in that directory where you are at the moment when running command  below or change path whatever you wish to save database elsewhere by replacing [$(pwd)](https://en.wikipedia.org/wiki/Pwd) which is variable set to the present working directory.
 
 To run our MySQL server container type following command.
 ``` bash
 $ docker run -p 3306:3306 -d --rm --name myproject-db --net my-network -e MYSQL_USER=admin -e MYSQL_DATABASE=test -e MYSQL_PASSWORD=passwd -e MYSQL_RANDOM_ROOT_PASSWORD=true -v $(pwd)/.data:/var/lib/mysql mysql:5.7
 ```
 
-Now you should have MySQL container up and running, because we dont currently have database which our application uses lets create it.
+Now you should have MySQL container up and running, but because we don't currently have a database that our application uses let's create it.
 
 To get [inside of docker container](https://docs.docker.com/engine/reference/commandline/exec/) type following command:
 ``` bash
@@ -101,7 +101,7 @@ You can also stop container by id which you can see with: "docker ps" -command.
 
 ### Docker-compose
 
-Running containers with docker compose is pretty straight forward. To understand the [logic behind docker-compose.yml file](https://docs.docker.com/compose/compose-file/) which is used to run our containers I recommend to get containers running without compose first if you haven't already done it.
+Running containers with docker-compose is pretty straight forward. To understand the [logic behind docker-compose.yml file](https://docs.docker.com/compose/compose-file/) which is used to run our containers I recommend to get containers running without compose first if you haven't already done it.
 
 #### Docker-compose
 
