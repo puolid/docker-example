@@ -1,4 +1,5 @@
 <?php
+// src/Database.php
 
 class Database
 {
@@ -9,7 +10,7 @@ class Database
      */
     public function __construct()
     {
-        $this->connect();
+        $this->getConnection();
     }
 
     /**
@@ -21,12 +22,27 @@ class Database
     }
 
     /**
+     * Get connection
+     */
+    public function getConnection()
+    {
+        if($this->connect() == true)
+        {
+            $this->connect();
+        }
+        else
+        {
+            echo "Connection to database failed";
+        }
+    }
+
+    /**
      * Database connection
      */
     private function connect()
     {
         // Get mysql conf data from env
-        $host = getenv("MYSQL_HOST");
+        $host = getenv('MYSQL_HOST');
         $db = getenv('MYSQL_DATABASE');
         $username = getenv('MYSQL_USER');
         $password = getenv('MYSQL_PASSWORD');
@@ -41,10 +57,9 @@ class Database
         }
         
         // if connection fails: exit and give error msg
-        catch(PDOException $e)
+        catch(PDOException $connectionError)
         {
             return false;
-            //echo "Connection failed: " . $e->getMessage();
         }
     }
 
