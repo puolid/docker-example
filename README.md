@@ -1,12 +1,12 @@
 # Docker example project
 
 
-The purpose of this project is present how to create two [Docker](https://www.docker.com/) containers and run [Apache](https://httpd.apache.org/), [PHP](https://www.php.net/) and our web-application in one of them and in the other [MySQL](https://www.mysql.com/) database. The application which we are using in this example is simple [url shortener](https://en.wikipedia.org/wiki/URL_shortening).
+The purpose of this project is to present how to create two [Docker](https://www.docker.com/) containers and run [Apache](https://httpd.apache.org/), [PHP](https://www.php.net/) and our web-application in one of them and in the other [MySQL](https://www.mysql.com/) database. The application which we are using in this example is a simple [URL shortener](https://en.wikipedia.org/wiki/URL_shortening).
 
 
 ## Installation
 
-Install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) if you dont have them already installed.
+Install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) if you don't have them already installed.
 
 Clone this repository
 ```bash
@@ -24,7 +24,7 @@ To get our containers running I recommend to look first our [Dockerfile](https:/
 
 #### Docker network
 
-Create new [docker network](https://docs.docker.com/network/) so our application server can find/connect to MySQL server. Containers in same network can call each other by container name.
+Create a new [docker network](https://docs.docker.com/network/) so our application server can find/connect to the MySQL server. Containers in the same network can call each other by container name.
 
 To create new network type following command:
 ``` bash
@@ -47,14 +47,14 @@ To run our application container type following command.
 $ docker run --rm --name myproject-app --net my-network -p 80:80 -d -e MYSQL_HOST=myproject-db -e MYSQL_USER=admin -e MYSQL_DATABASE=test -e MYSQL_PASSWORD=passwd myproject-app
 ```
 
-> Note. Our PHP-Application database class gets database settings from enviroinment (-e) variables so if you decied to change them remeber change them for mysql container too.
+> Note. Our PHP-Application database class gets database settings from the environment (-e) variables so if you decided to change them remember to change them for MySQL container too.
 
 
 #### MySQL container
 
-For our MySQL container we are using offical [MySQL 5.7 image from docker hub](https://hub.docker.com/_/mysql). We are not using our own dockerfile to create image beacuse in this example we dont need to install anything else on it. 
+For our MySQL container, we are using official [MySQL 5.7 image from docker hub](https://hub.docker.com/_/mysql). We are not using our own dockerfile to create image because in this example we don't need to install anything else on it. 
 
-So you might thinking now what happens to our database after we stop our container. With command [-v we are creating volume](https://docs.docker.com/storage/volumes/) which store our database to our local system. You can find this volume in that directory where you are at the moment when running command  below or change path what ever you wish to save that database replacing [$(pwd)](https://en.wikipedia.org/wiki/Pwd) which is variable se to the present working directory.
+So you might be thinking now what happens to our database after we stop our container. With command [-v we are creating volume](https://docs.docker.com/storage/volumes/) which stores our database to our local system. You can find this volume in that directory where you are at the moment when running command  below or change path whatever you wish to save that database replacing [$(pwd)](https://en.wikipedia.org/wiki/Pwd) which is variable set to the present working directory.
 
 To run our MySQL server container type following command.
 ``` bash
@@ -68,7 +68,7 @@ To get [inside of docker container](https://docs.docker.com/engine/reference/com
 $ docker exec -it myproject-db bash
 ```
 
-Next run MySQL cli with command:
+Next, run MySQL CLI with command:
 ``` bash
 $ mysql -u admin -p
 ```
@@ -101,11 +101,11 @@ You can also stop container by id which you can see with: "docker ps" -command.
 
 ### Docker-compose
 
-Running containers with docker compose is pretty straight forward. To understand the [logic behind docker-compose.yml file](https://docs.docker.com/compose/compose-file/) which is used to run our containers I recommend to get containers running without compose first if you havent already done it.
+Running containers with docker compose is pretty straight forward. To understand the [logic behind docker-compose.yml file](https://docs.docker.com/compose/compose-file/) which is used to run our containers I recommend to get containers running without compose first if you haven't already done it.
 
 #### Docker-compose
 
-To run this example project on [docker compose](https://docs.docker.com/compose/) you need just first to build image of our Apache-PHP container. 
+To run this example project on [docker-compose](https://docs.docker.com/compose/) you need just first to build an image of our Apache-PHP container. 
 
 To build our image type following command:
 ``` bash
