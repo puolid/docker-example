@@ -28,7 +28,7 @@ Create a new [docker network](https://docs.docker.com/network/) so our applicati
 
 To create new network type following command:
 ``` bash
-$ docker network create mynetwork
+$ docker network create my-network
 ```
 
 #### Apache-PHP container

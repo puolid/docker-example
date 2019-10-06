@@ -2,3 +2,6 @@
 .dockerignore
 Dockerfile
 readme.md
+LICENSE
+docker-compose.yml
+.data
