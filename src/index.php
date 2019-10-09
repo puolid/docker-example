@@ -4,13 +4,13 @@
 require_once('UrlShortenerController.php');
 
 $urlController = new urlShortenerController();
-$getPage = htmlspecialchars($_GET['do']);
 
-if ($getPage == null)
+
+if ($_POST["url"] == null && $_GET["url"] == null)
 {
     $urlController->index();
 }
-else if ($getPage == 'add')
+else if ($_POST['url'] != null)
 {
     $url = htmlspecialchars($_POST['url']);
     if ($url != null)
@@ -19,10 +19,10 @@ else if ($getPage == 'add')
     }
     else
     {
-        echo 'url not found';
+        echo 'URL not found.';
     }
 }
-else if ($getPage == 'get')
+if ($_GET["url"] != null)
 {
     $url = htmlspecialchars($_GET['url']);
     if ($url != null)
@@ -31,7 +31,7 @@ else if ($getPage == 'get')
     }
     else
     {
-        echo 'url not found';
+        echo 'URL not found.';
     }
 }
 

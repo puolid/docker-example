@@ -39,8 +39,15 @@ class UrlShortenerController
     
         $shorturl = hash("adler32", $url);
         
-        $this->database->addUrl($url, $shorturl);
-        require_once('AddedUrlView.php');
+        if ($this->database->addUrl($url, $shorturl))
+        {
+            require_once('AddedUrlView.php');
+        }
+        else
+        {
+            echo 'Failed add url to database';
+        }
+        
     }
 
     /**
@@ -50,8 +57,15 @@ class UrlShortenerController
     {
         $newurl = $this->database->getUrl($url);
 
-        header('Location: ' . $newurl);
-        exit();
+        if ($newurl != null)
+        {
+            header('Location: ' . $newurl);
+            exit();
+        }
+        else
+        {
+            echo 'URL not found!';
+        }
     }
 }
 

@@ -15,6 +15,9 @@ nano
 # Install PHP PDO package so our app can create a PDO connection to our database
 RUN docker-php-ext-install pdo_mysql
 
+# Enable mod rewrite
+RUN a2enmod rewrite
+
 # Set the current working directory to apache default public HTML directory.
 WORKDIR /var/www/html
 

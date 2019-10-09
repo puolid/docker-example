@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# if request is not for a directory
+#RewriteCond %{index.php} !-d
+# if request is not for a file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php?url=$1 [L,QSA]

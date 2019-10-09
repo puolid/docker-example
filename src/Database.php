@@ -32,7 +32,7 @@ class Database
         }
         else
         {
-            echo "Connection to database failed";
+            echo "Failed to connect database";
         }
     }
 
@@ -73,6 +73,15 @@ class Database
         $sqlentry->bindParam(':url', $url, PDO::PARAM_STR);
         $sqlentry->bindParam(':shorturl', $shorturl, PDO::PARAM_STR);
         $sqlentry->execute();
+
+        if ($sqlentry->rowCount())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
